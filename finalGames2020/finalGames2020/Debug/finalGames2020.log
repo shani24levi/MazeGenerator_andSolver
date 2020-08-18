@@ -1,0 +1,8 @@
+﻿  main.cpp
+  Maze2d.cpp
+  Maze2dGenerator.cpp
+  Position.cpp
+  TestMazeGenerator.cpp
+  Generating Code...
+main.obj : error LNK2019: unresolved external symbol "public: __thiscall simpleMaze2dGenerator::simpleMaze2dGenerator(void)" (??0simpleMaze2dGenerator@@QAE@XZ) referenced in function _main
+C:\Users\shani\source\repos\finalGames2020\Debug\finalGames2020.exe : fatal error LNK1120: 1 unresolved externals
