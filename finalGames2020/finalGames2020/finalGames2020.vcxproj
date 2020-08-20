@@ -123,11 +123,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CLI.cpp" />
     <ClCompile Include="CommonSearcher.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maze2d.cpp" />
     <ClCompile Include="Maze2dGenerator.cpp" />
     <ClCompile Include="Maze2dSearchable.cpp" />
+    <ClCompile Include="MazeCompression.cpp" />
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="Demo.cpp" />
     <ClCompile Include="Searchable.cpp" />
@@ -136,10 +138,12 @@
     <ClCompile Include="TestMazeGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CLI.h" />
     <ClInclude Include="CommonSearcher.h" />
     <ClInclude Include="Maze2d.h" />
     <ClInclude Include="Maze2dGenerator.h" />
     <ClInclude Include="Maze2dSearchable.h" />
+    <ClInclude Include="MazeCompression.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="Demo.h" />
     <ClInclude Include="Searchable.h" />

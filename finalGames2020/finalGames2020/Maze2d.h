@@ -57,6 +57,16 @@ public:
 	inline auto getSizeMaze() { return _maze.size(); }
 	inline auto rowSize() { return _maze[0].size(); }
 	inline Position Positions() { return _mazPositions; }
+	std::vector < std::vector<int>> getData() { return _maze; }
+
+
+	inline int getIndex(int r,int c) { 
+		for (int i = 0; i < w; i++)
+			for (int j = 0; j < h; j++)
+				if (i == r && j == c)
+					return _maze[i][j];
+	}
+
 
 	//functions as asked in the project
 	std::string getGoalPosition();

@@ -14,4 +14,11 @@ void Solution::setSolution(std::unique_ptr<Position> s) {
 	m_solution.push_back(std::move(s)); //movee is used for move the unique_ptr
 }
 
+int Solution::SolutionSize() {
+	return m_solution.size();
+}
+
+//std::vector<std::unique_ptr<Position>> Solution::getSolution1() {
+//	return m_solution;
+//}
 

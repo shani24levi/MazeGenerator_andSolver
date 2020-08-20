@@ -34,18 +34,23 @@ bool  BFS::isValid(Maze2dSearchable& s , std::vector<std::vector<int>>  visited,
 {
 
 	return (row >= 0) && (row < s.getMaze().getW()) && (col >= 0) && (col < s.getMaze().getH())
-		&& s.getMaze().getMaze(row, col) == 0 && !visited[row][col];
-
+		&& s.getMaze().getMaze(row, col) == 0 && !visited[row][col]; //visited =0 meens unvisted
 }
 
-std::shared_ptr<Solution> BFS::search(Searchable& s) {
-	std::shared_ptr<Solution> solve;
+bool  BFS::isValidEnd(Maze2dSearchable& s, std::vector<std::vector<int>>  visited, int row, int col)
+{
+	return (row >= 0) && (row < s.getMaze().getW()) && (col >= 0) && (col < s.getMaze().getH())
+		&& s.getMaze().getMaze(row, col) == 10;
+}
+
+Solution BFS::search(Searchable& s) {
+	Solution solve2;
 
 	//Function for routing by game type
 	//The implementation of the function is by type of game so it should not have been covered here at all.
 	std::cout << "Function for routing by game type" << std::endl;
 
-	return solve;
+	return solve2;
 }
 
 
@@ -62,64 +67,14 @@ void BFS::drowFormat(Maze2dSearchable& s, std::vector<std::vector<int>>  visited
 	}
 }
 
-//
-//int BFS::bfsMaze(Maze2dSearchable& s, std::vector<std::vector<int>> current, int row, int col) {
-//
-//	if (row == s.getpositions().getXend() && col == s.getpositions().getYend())
-//		return 1;
-//	
-//	if (current[row][col] == 0) {
-//		current[row][col] = 1;
-//
-//		if ((row >= 0) && (row < s.getMaze().getW()) && (col - 1 >= 0) && (col - 1 < s.getMaze().getH())) {
-//			if (bfsMaze(s, current, row, col - 1)) {
-//				current[row][col] = 2;
-//				s.getMaze().setMaze(row, col, 2);
-//				return 1;
-//			}
-//		}
-//		else if ((row + 1 >= 0) && (row + 1 < s.getMaze().getW()) && (col >= 0) && (col < s.getMaze().getH())) {
-//			if (bfsMaze(s, current, row + 1, col)) {
-//				current[row][col] = 2;
-//				s.getMaze().setMaze(row, col, 2);
-//
-//				return 1;
-//			}
-//		}
-//		else if ((row >= 0) && (row < s.getMaze().getW()) && (col + 1 >= 0) && (col + 1 < s.getMaze().getH())) {
-//			if (bfsMaze(s, current, row, col + 1)) {
-//				current[row][col] = 2;
-//				s.getMaze().setMaze(row, col, 2);
-//
-//				return 1;
-//			}
-//		}
-//		else if ((row - 1 >= 0) && (row - 1 < s.getMaze().getW()) && (col >= 0) && (col < s.getMaze().getH())) {
-//			if (bfsMaze(s, current, row - 1, col)) {
-//				current[row][col] = 2;
-//				s.getMaze().setMaze(row, col, 2);
-//
-//				return 1;
-//			}
-//		}
-//	}
-//	
-//
-//	return 0;
-//}
 
-
-std::shared_ptr<Solution> BFS::search(Maze2dSearchable& s){
+Solution BFS::search(Maze2dSearchable& s) {
 	Solution solve; //Holds the array of solutions
-	std::shared_ptr<Solution> solvePtr ;
-	//set pointer:
-	solvePtr = std::shared_ptr<Solution>(&solve);
 
-	//Start with curr position of the Player 
-	int currPosition = s.getpositions().getCuurPosition();
 	//get the (x,y) of end Position:
 	int x = s.getpositions().getXend();
 	int y = s.getpositions().getYend();
+	GoalFound = false;
 
 
 	//push it as a starting point of the path souletion
@@ -134,7 +89,6 @@ std::shared_ptr<Solution> BFS::search(Maze2dSearchable& s){
 		}
 		_visited.push_back(row);
 	}
-
 
 	while (!m_openList.empty())
 	{
@@ -154,60 +108,100 @@ std::shared_ptr<Solution> BFS::search(Maze2dSearchable& s){
 			break;
 		}
 
-		//bfsMaze(s, _visited,i,j);
-
-		//int neighbours[][2] = { {0,0}, {0,0}, {0,0}, {0,0} };
-		//std::vector<Position>  neighbours;
-		//std::vector<std::vector<int>>  neighbours;
-		int neighboursX[4] = { 0 };
-		int neighboursY[4] = { 0 };
-
-
 		// check for all 4 possible movements from current cell
-		// and enqueue each valid movement
 		for (int k = 0; k < 4; k++)
 		{
-			// check if it is possible to go to position
-			// (i + row[k], j + col[k]) from current position
-			if (isValid(s, _visited , i + row[k], j + col[k]))
-			{	
-				//set all the neighbours of curr cube in arry 
-				neighboursX[k] = i + row[k];
-				neighboursY[k] = j + col[k];  //[0][0] ,[1][1],[2][2],[3][3]
-
-				//if (!_visited[i + row[k]][j + col[k]]) // if next  is not visited
-				//	prev.push_back(std::make_unique<Position>(s.getpositions()));
-
-				// mark next cell as visited and enqueue it
-				_visited[i + row[k]][j + col[k]] = 2;
-				s.getMaze().setMaze(i + row[k], j + col[k], 2);
-
-
-				m_evaluateNodes = m_evaluateNodes + 1;
+			//when get to the goal 
+			if (isValidEnd(s, _visited, i + row[k], j + col[k])) {
+				prev.push_back(std::make_unique<Position>(s.getpositions()));
 				s.setNewPosition(i + row[k], j + col[k]);
-				m_openList.push(s.getpositions());
-				//q.push({ i + row[k], j + col[k], m_evaluateNodes + 1 });
+				prev.push_back(std::make_unique<Position>(s.getpositions()));
+				GoalFound = true;
 			}
 		}
 
-		//Check the nebers :
+		if (GoalFound) break;
 
+		//  enqueue each valid movement
+		for (int k = 0; k < 4; k++)
+		{
+
+			// get all un visited nodes
+			if (isValid(s, _visited , i + row[k], j + col[k]))
+			{	
+				// mark next cell as visited and enqueue it
+				_visited[i + row[k]][j + col[k]] = 2;
+				prev.push_back(std::make_unique<Position>(s.getpositions()));
+
+				//s.getMaze().setMaze(i + row[k], j + col[k], 2);
+
+				m_evaluateNodes = m_evaluateNodes + 1;
+				//put the node to array of nabres
+				s.setNewPosition(i + row[k], j + col[k]);
+				m_openList.push(s.getpositions());
+			}
+		}
 	}
+	//if not found return empty
+	if( !GoalFound ) 
+		return solve;  //empty
 
-	drowFormat(s, _visited);
-	s.getMaze().drowMaze();
-
-
-	//set next cube: 
-	m_openList.push(s.getpositions());
-	s.setNewPosition(++x, ++y);
-	m_openList.push(s.getpositions());
-
-	//s.setNewPosition(++currPosition);
-	//m_openList.push(s.getpositions());
-	//std::cout << "2  ";
-	print_queue();
+	//if found set in a sulotion and retuen
+	Position endP = s.getpositions();
+	auto nextPtr = std::make_unique<Position>(endP); //end position
 
 
-	return solvePtr;
+	auto nn = prev.size();
+	int n = (int)nn;
+		
+	for (nextPtr; prev.size() ;) {
+
+		if (n == 0) {
+			solve.setSolution(std::move(nextPtr));
+			return solve;
+		}
+		--n;
+		std::unique_ptr<Position> nextPtr = std::move(prev.at(n));
+		int x = nextPtr.get()->getPosition1();
+		int y = nextPtr.get()->getPosition2();
+
+		solve.setSolution(std::move(nextPtr));
+		if(s.getMaze().getMaze(x,y) != 10 && s.getMaze().getMaze(x, y) != 9)
+			s.getMaze().setMaze( x , y , 2 );
+	}
+}
+
+
+
+/////***------------------AStar----------------------------***///
+Solution AStar::search(Searchable& s) {
+	Solution solve2;
+
+	//Function for routing by game type
+	//The implementation of the function is by type of game so it should not have been covered here at all.
+	std::cout << "Function for routing by game type" << std::endl;
+
+	return solve2;
+}
+Solution AStar::search(Maze2dSearchable& s) {
+	Solution solve; //Holds the array of solutions
+	return solve;
+}
+
+void AStar::setSolve(Maze2dSearchable& m, Solution& s) {
+	//int n = s.SolutionSize();
+		
+	//for (int i=0 ; i < n; i++) {
+	//	//auto a = s.getSolution1();
+	//	//a[n].get()->getPosition1();
+	//	//int x = a.front().get()->getPosition1();
+	//	//int y = a.front().get()->getPosition2();
+
+	//	//if(m.getMaze().getMaze(x,y) != 10 && m.getMaze().getMaze(x, y) != 9)
+	//	//	m.getMaze().setMaze( x , y , 2 );
+	//}
+}
+
+void AStar::printAStarInMaze(Maze2dSearchable& m) {
+	//std::cout << m.getMaze() << std::endl;
 }

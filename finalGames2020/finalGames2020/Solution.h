@@ -13,9 +13,11 @@ class Solution
 {
 public:
 	Solution();
-	~Solution() {};
+	//~Solution() {};
 	std::shared_ptr<std::vector<std::unique_ptr<Position>>> getSolution();
+	//std::vector<std::unique_ptr<Position>> getSolution1();
 	void setSolution(std::unique_ptr<Position> s);
+	int SolutionSize();
 
 
 protected:

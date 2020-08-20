@@ -30,7 +30,7 @@ int main(void)
 	BFS bfs;
 	//bool a[2];
 	//bfs.isValid(e, a, 0, 0);
-	std::shared_ptr<Solution> b = bfs.search(e);
+	Solution b = bfs.search(e);
 	//Solution s = bfs.search(e);
 
 

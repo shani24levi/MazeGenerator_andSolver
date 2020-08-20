@@ -10,7 +10,7 @@
 class Searcher //Pure Abstract class 
 {
 public:
-	virtual std::shared_ptr<Solution> search(Searchable& s) = 0;
+	virtual Solution search(Searchable& s) = 0;
 	virtual int getNumberOfNodeMaze2d() = 0;  //how much has allrady invaloated 
 };
 

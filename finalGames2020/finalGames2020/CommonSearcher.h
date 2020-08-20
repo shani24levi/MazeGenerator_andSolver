@@ -16,12 +16,11 @@ public:
 	CommonSearcher();
 
 	////implamantion of Searcher mathodes
-	virtual std::shared_ptr<Solution> search(Searchable& s) = 0 ; //abstract mathode
+	virtual Solution search(Searchable& s) = 0 ; //abstract mathode
 	virtual int getNumberOfNodeMaze2d() { return m_evaluateNodes; }
 
 	const Position& popOpenList() { m_evaluateNodes++; return m_openList.top(); }
 	void print_queue();
-
 
 protected:
 	int m_evaluateNodes;
@@ -57,15 +56,17 @@ class BFS : public CommonSearcher
 {
 public:
 	BFS() : CommonSearcher(){}
-	virtual std::shared_ptr<Solution> search(Searchable& s);
-	std::shared_ptr<Solution> search(Maze2dSearchable& s);
+	Solution search(Searchable& s);
+	Solution search(Maze2dSearchable& s);
 
 	bool isValid(Maze2dSearchable& s, std::vector<std::vector<int>> visited, int row, int col);
+	bool isValidEnd(Maze2dSearchable& s, std::vector<std::vector<int>> visited, int row, int col);
 	void drowFormat(Maze2dSearchable& s, std::vector<std::vector<int>>  visited);
 	//int bfsMaze(Maze2dSearchable& s, std::vector<std::vector<int>> current, int row, int col);
 
 private: 
 	std::vector<std::unique_ptr<Position>> prev;
+	bool GoalFound;
 };
 
 
@@ -75,5 +76,10 @@ class AStar : public CommonSearcher
 {
 public:
 	AStar() : CommonSearcher() {}
-	virtual std::shared_ptr<Solution> search(Searchable& s);
+	Solution search(Searchable& s);
+	Solution search(Maze2dSearchable& s);
+	void setSolve(Maze2dSearchable& m, Solution& s);
+	void printAStarInMaze(Maze2dSearchable& m);
+
+
 };
