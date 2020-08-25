@@ -1,0 +1,31 @@
+﻿  CLI.cpp
+  Command.cpp
+  CommonSearcher.cpp
+  Controller.cpp
+  Demo.cpp
+  Maze2d.cpp
+  Maze2dGenerator.cpp
+C:\Users\shani\source\repos\nnnnnnnnnnnn\nnnnnnnnnnnn\Maze2dGenerator.cpp(80,30): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\shani\source\repos\nnnnnnnnnnnn\nnnnnnnnnnnn\Maze2dGenerator.cpp(80,55): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\shani\source\repos\nnnnnnnnnnnn\nnnnnnnnnnnn\Maze2dGenerator.cpp(101,26): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\shani\source\repos\nnnnnnnnnnnn\nnnnnnnnnnnn\Maze2dGenerator.cpp(101,50): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\shani\source\repos\nnnnnnnnnnnn\nnnnnnnnnnnn\Maze2dGenerator.cpp(142,12): warning C4018: '<': signed/unsigned mismatch
+  Maze2dSearchable.cpp
+  MazeCompression.cpp
+C:\Users\shani\source\repos\nnnnnnnnnnnn\nnnnnnnnnnnn\Maze2dGenerator.cpp(144,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shani\source\repos\nnnnnnnnnnnn\nnnnnnnnnnnn\MazeCompression.cpp(263,25): warning C4244: '=': conversion from 'std::streamoff' to 'long', possible loss of data
+  Model.cpp
+  Position.cpp
+  Searchable.cpp
+  Searcher.cpp
+  Solution.cpp
+  Source.cpp
+  TestMazeGenerator.cpp
+  View.cpp
+  Generating Code...
+C:\Users\shani\source\repos\nnnnnnnnnnnn\nnnnnnnnnnnn\MazeCompression.cpp(265,23): warning C4244: '=': conversion from 'std::streamoff' to 'long', possible loss of data
+C:\Users\shani\source\repos\nnnnnnnnnnnn\nnnnnnnnnnnn\Model.cpp(65): warning C4715: 'Model::solve': not all control paths return a value
+C:\Users\shani\source\repos\nnnnnnnnnnnn\nnnnnnnnnnnn\Model.cpp(52): warning C4172: returning address of local variable or temporary: b
+C:\Users\shani\source\repos\nnnnnnnnnnnn\nnnnnnnnnnnn\Model.cpp(24): warning C4172: returning address of local variable or temporary: maze1
+C:\Users\shani\source\repos\nnnnnnnnnnnn\nnnnnnnnnnnn\CommonSearcher.cpp(172): warning C4715: 'BFS::search': not all control paths return a value
+  nnnnnnnnnnnn.vcxproj -> C:\Users\shani\source\repos\nnnnnnnnnnnn\Debug\nnnnnnnnnnnn.exe
